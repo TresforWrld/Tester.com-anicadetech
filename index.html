@@ -7,377 +7,91 @@
 <link rel="icon" type="image/png" href="assets/logo.png">
 <link rel="stylesheet" href="shared.css">
 <style>
-/* ── BASE & NAV (COMPACT) ── */
 :root {
   --navy: #0A1628;
-  --gold: #BFA76A;
-  --gold-light: #D4BE8C;
-  --bg: #F5F7FA;
-  --bg-white: #FFFFFF;
-  --text-mid: #2C3E4E;
-  --text-muted: #5A6E7C;
-  --line-dark: #E2E8F0;
+  --gold: #C0A96A;
+  --gold-light: #d4c18c;
+  --bg: #f4f6f8;
+  --bg-white: #ffffff;
 }
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-  font-family: 'Open Sans', system-ui, -apple-system, sans-serif;
-  background: var(--bg-white);
-  color: var(--text-mid);
-  line-height: 1.5;
-}
-.container { max-width: 1280px; margin: 0 auto; padding: 0 32px; }
-@media (max-width: 768px) { .container { padding: 0 24px; } }
 
-/* Compact nav */
+/* ── COMPACT NAV ── */
 nav {
-  background: var(--bg-white);
-  padding: 12px 32px;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 1px solid var(--line-dark);
-  position: sticky;
-  top: 0;
-  z-index: 100;
-}
-.nav-logo img { height: 32px; width: auto; display: block; }
-.nav-links {
-  display: flex;
-  list-style: none;
-  gap: 20px;
-  align-items: center;
-}
-.nav-links li a {
-  text-decoration: none;
-  font-size: 12px;
-  font-weight: 600;
-  letter-spacing: 0.04em;
-  color: var(--navy);
-  text-transform: uppercase;
-  transition: color 0.2s;
-}
-.nav-links li a:hover, .nav-links li a.active { color: var(--gold); }
-.nav-links .nav-cta {
-  background: var(--gold);
-  color: var(--navy);
-  padding: 8px 16px;
-  border-radius: 0;
-  font-size: 11px;
-}
-.nav-links .nav-cta:hover { background: var(--navy); color: var(--gold); }
-.nav-hamburger {
-  display: none;
-  flex-direction: column;
-  gap: 5px;
-  background: none;
-  border: none;
-  cursor: pointer;
-}
-.nav-hamburger span {
-  width: 22px;
-  height: 2px;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 10px 60px;
   background: var(--navy);
+  height: 70px;
 }
-.nav-drawer {
-  position: fixed;
-  top: 0;
-  right: -100%;
-  width: 280px;
-  height: 100%;
-  background: var(--bg-white);
-  box-shadow: -4px 0 20px rgba(0,0,0,0.05);
-  padding: 80px 32px 32px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  z-index: 200;
-  transition: right 0.3s;
-}
-.nav-drawer.open { right: 0; }
-.nav-drawer a {
-  text-decoration: none;
-  font-size: 14px;
-  font-weight: 500;
-  color: var(--navy);
-  padding: 8px 0;
-  border-bottom: 1px solid var(--line-dark);
-}
-.nav-drawer .drawer-cta { background: var(--gold); text-align: center; margin-top: 16px; color: var(--navy); font-weight: 700; }
-@media (max-width: 768px) {
-  nav { padding: 10px 24px; }
-  .nav-links { display: none; }
-  .nav-hamburger { display: flex; }
-}
+.nav-logo img { height: 40px; }
+.nav-links { display: flex; gap: 30px; list-style: none; margin: 0; }
+.nav-links a { font-size: 12px; text-transform: uppercase; color: #fff; text-decoration: none; font-weight: 600; }
+.nav-cta { border: 1px solid var(--gold); padding: 8px 16px; }
 
-/* ── HERO (CROPPED, SHORTER) ── */
+/* ── HERO ── */
 #hero {
-  min-height: 70vh;
-  min-height: 70svh;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  position: relative;
-  overflow: hidden;
-  padding: 0;
+  height: 70vh;
+  min-height: 500px;
+  display: flex; flex-direction: column; justify-content: center;
+  position: relative; overflow: hidden; padding: 0 60px;
 }
 .hero-bg { position: absolute; inset: 0; }
 .hero-slide {
-  position: absolute;
-  inset: 0;
-  background-position: center 30%; /* crop top & bottom by shifting focus upward */
+  position: absolute; inset: 0;
+  background-position: center 30%;
   background-size: cover;
   background-repeat: no-repeat;
   opacity: 0;
   animation: heroSlideshow 18s ease-in-out infinite;
+  transform: scale(1.03);
 }
 .hero-slide:nth-child(1) { animation-delay: 0s; }
 .hero-slide:nth-child(2) { animation-delay: 6s; }
 .hero-slide:nth-child(3) { animation-delay: 12s; }
 @keyframes heroSlideshow {
-  0%   { opacity: 0; }
+  0%   { opacity: 0; transform: scale(1.03); }
   5%   { opacity: 1; }
   30%  { opacity: 1; }
-  38%  { opacity: 0; }
-  100% { opacity: 0; }
+  38%  { opacity: 0; transform: scale(1.07); }
+  100% { opacity: 0; transform: scale(1.07); }
 }
+
 .hero-gradient {
   position: absolute; inset: 0; pointer-events: none; z-index: 1;
-  background: linear-gradient(to top, rgba(10,22,40,0.8) 0%, rgba(10,22,40,0.4) 40%, transparent 80%);
+  background: linear-gradient(to top, rgba(10,22,40,0.8) 0%, rgba(10,22,40,0.2) 100%);
 }
-.hero-content {
-  position: relative;
-  z-index: 3;
-  width: 100%;
-  max-width: 800px;
-  padding: 0 60px 60px;
-}
-.hero-eyebrow {
-  display: flex; align-items: center; gap: 16px; margin-bottom: 16px;
-  opacity: 0; animation: fadeUp 0.9s 0.3s forwards;
-}
+.hero-content { position: relative; z-index: 3; width: 100%; max-width: 700px; }
+.hero-eyebrow { display: flex; align-items: center; gap: 16px; margin-bottom: 20px; }
 .hero-eyebrow-line { width: 40px; height: 1px; background: var(--gold); }
 .label { color: var(--gold-light); font-size: 11px; letter-spacing: 0.1em; text-transform: uppercase; }
-.hero-content h1 {
-  font-size: clamp(24px, 3.2vw, 38px);
-  font-weight: 600; color: #FFFFFF; margin-bottom: 12px;
-  opacity: 0; animation: fadeUp 0.9s 0.5s forwards;
-  line-height: 1.2; max-width: 620px;
-}
+.hero-content h1 { font-size: clamp(28px, 4vw, 42px); color: #FFFFFF; margin-bottom: 20px; line-height: 1.2; }
 .hero-content h1 em { font-style: italic; color: var(--gold-light); }
-.hero-sub {
-  font-size: 13px; color: rgba(240,244,248,0.85); max-width: 500px;
-  line-height: 1.7; margin-bottom: 28px;
-  opacity: 0; animation: fadeUp 0.9s 0.7s forwards;
-}
-.hero-btns {
-  display: flex; gap: 12px; flex-wrap: wrap;
-  opacity: 0; animation: fadeUp 0.9s 0.9s forwards;
-}
-.hero-btns .btn-primary {
-  background: var(--gold); color: var(--navy); border: 1px solid var(--gold);
-  padding: 10px 24px; font-size: 10px;
-}
-.hero-btns .btn-primary:hover { background: transparent; color: var(--gold); }
-.hero-btns .btn-outline {
-  background: transparent; color: rgba(240,244,248,0.9); border: 1px solid rgba(240,244,248,0.4);
-  padding: 10px 24px; font-size: 10px;
-}
-.hero-btns .btn-outline:hover { background: rgba(255,255,255,0.1); color: #fff; }
-.hero-dots {
-  position: absolute; bottom: 24px; left: 50%; transform: translateX(-50%);
-  display: flex; gap: 10px; z-index: 5;
-}
-.hero-dot {
-  width: 7px; height: 7px; border: 1px solid rgba(255,255,255,0.6);
-  background: transparent; cursor: pointer;
-}
-.hero-dot.active, .hero-dot:hover { background: var(--gold); border-color: var(--gold); }
-.hero-scroll {
-  position: absolute; bottom: 30px; right: 40px;
-  display: flex; flex-direction: column; align-items: center; gap: 6px; z-index: 4;
-}
-.hero-scroll-line { width: 1px; height: 40px; background: var(--gold); opacity: 0.6; }
-.hero-scroll span { font-size: 8px; letter-spacing: 0.2em; color: rgba(240,244,248,0.5); writing-mode: vertical-rl; }
-/* hero stats hidden on small screens, visible desktop */
-.hero-stats {
-  position: absolute; top: 0; right: 0;
-  display: flex; z-index: 4;
-}
-.hero-stat {
-  padding: 18px 24px;
-  background: rgba(10,22,40,0.65);
-  backdrop-filter: blur(6px);
-  border-left: 1px solid rgba(184,197,212,0.15);
-  text-align: center;
-}
-.hero-stat-num { font-size: 22px; font-weight: 600; color: var(--gold-light); }
-.hero-stat-lbl { font-size: 8px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(184,197,212,0.6); margin-top: 4px; }
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(16px); }
-  to { opacity: 1; transform: translateY(0); }
-}
-/* Mobile hero: smaller height, better text fit */
+.hero-sub { font-size: 15px; color: rgba(255,255,255,0.9); line-height: 1.6; margin-bottom: 30px; }
+.hero-btns { display: flex; gap: 15px; }
+.btn-primary { background: var(--gold); color: var(--navy); padding: 12px 28px; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+.btn-outline { border: 1px solid rgba(255,255,255,0.4); color: #fff; padding: 12px 28px; text-decoration: none; font-size: 11px; font-weight: 700; text-transform: uppercase; }
+
+/* ── MOBILE RESPONSIVENESS ── */
 @media (max-width: 768px) {
-  #hero { min-height: 60vh; min-height: 60svh; }
-  .hero-content { padding: 0 24px 40px; }
-  .hero-scroll { display: none; }
-  .hero-stats { display: none; }
-  .hero-content h1 { font-size: 22px; max-width: 100%; }
-  .hero-sub { font-size: 12px; margin-bottom: 24px; }
-  .hero-eyebrow .label { font-size: 9px; }
-  .hero-dots { bottom: 16px; }
-  .hero-slide { background-position: center 25%; } /* adjust crop for mobile */
+  nav { padding: 15px 20px; }
+  #hero { height: 60vh; padding: 0 20px; align-items: center; text-align: center; }
+  .hero-content { background: rgba(10, 22, 40, 0.7); padding: 30px; border-radius: 8px; }
+  .hero-content h1 { font-size: 24px; }
+  .hero-btns { justify-content: center; flex-direction: column; }
 }
-@media (max-width: 480px) {
-  #hero { min-height: 55vh; }
-  .hero-content { padding: 0 20px 32px; }
-  .hero-btns { flex-direction: column; gap: 8px; }
-  .hero-btns a { text-align: center; }
-}
-
-/* INTRO & OTHER SECTIONS (unchanged styling) */
-.intro-band { background: var(--bg-white); border-bottom: 1px solid var(--line-dark); }
-.intro-inner {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 72px; align-items: center;
-  padding: 80px 0;
-}
-.intro-left p { font-size: 15px; color: var(--text-mid); line-height: 1.9; margin-bottom: 14px; }
-.intro-left .lead {
-  font-family: 'Roboto', sans-serif; font-size: 22px; font-style: italic;
-  color: var(--navy); line-height: 1.55; margin-bottom: 20px; font-weight: 400;
-}
-.intro-right { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--line-dark); border: 1px solid var(--line-dark); }
-.intro-cap {
-  background: var(--bg); padding: 28px 22px;
-  display: flex; align-items: flex-start; gap: 14px;
-  transition: background 0.3s;
-}
-.intro-cap:hover { background: var(--bg-white); }
-.intro-cap svg { color: var(--gold); flex-shrink: 0; margin-top: 3px; }
-.intro-cap strong { display: block; font-family: 'Roboto', sans-serif; font-size: 16px; color: var(--navy); margin-bottom: 3px; font-weight: 500; }
-.intro-cap span { font-size: 12px; color: var(--text-muted); }
-
-.sections-area { background: var(--bg); padding: 72px 0; }
-.sections-label { margin-bottom: 52px; }
-.sections-label h2 { font-size: clamp(30px, 4vw, 50px); }
-
-.cards-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr);
-  gap: 1px; background: var(--line-dark); border: 1px solid var(--line-dark);
-}
-.section-card {
-  background: var(--bg-white); padding: 52px 40px;
-  position: relative; overflow: hidden;
-  text-decoration: none; display: flex; flex-direction: column;
-  transition: background 0.3s;
-  border-bottom: 3px solid transparent;
-}
-.section-card:hover { background: var(--bg); border-bottom-color: var(--gold); }
-.section-card:hover .card-icon { color: var(--navy); }
-
-.card-icon { width: 44px; height: 44px; color: var(--gold); margin-bottom: 26px; transition: color 0.3s; }
-.section-card h3 { font-size: 24px; color: var(--navy); margin-bottom: 12px; font-weight: 600; }
-.section-card p { font-size: 13px; color: var(--text-muted); line-height: 1.85; flex: 1; }
-.card-link {
-  display: flex; align-items: center; gap: 8px; margin-top: 28px;
-  font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase;
-  color: var(--gold); font-weight: 700; font-family: 'Open Sans', sans-serif;
-}
-.card-link svg { transition: transform 0.3s; }
-.section-card:hover .card-link svg { transform: translateX(5px); }
-
-.highlights { background: var(--navy); padding: 80px 0; }
-.highlights-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.05); }
-.highlight-cell { background: var(--navy); padding: 44px 32px; text-align: center; }
-.highlight-num { font-family: 'Roboto', sans-serif; font-size: 52px; font-weight: 600; color: var(--gold-light); line-height: 1; margin-bottom: 10px; }
-.highlight-desc { font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase; color: rgba(184,197,212,0.45); font-weight: 600; }
-
-.closing-cta { background: var(--bg-white); padding: 100px 0; text-align: center; border-top: 1px solid var(--line-dark); }
-.closing-cta h2 { font-size: clamp(30px, 4vw, 54px); max-width: 640px; margin: 16px auto; }
-.closing-cta h2 em { font-style: italic; color: var(--gold); font-weight: 400; }
-.closing-cta p { font-size: 15px; color: var(--text-muted); max-width: 480px; margin: 0 auto 40px; line-height: 1.85; }
-.closing-btns { display: flex; gap: 14px; justify-content: center; flex-wrap: wrap; }
-
-footer {
-  background: var(--navy);
-  color: rgba(255,255,255,0.7);
-  padding: 64px 0 32px;
-}
-.footer-top {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 32px;
-  display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1.5fr;
-  gap: 48px;
-}
-.footer-logo { filter: brightness(0) invert(1); height: 36px; width: auto; margin-bottom: 14px; }
-.footer-tagline { font-size: 12px; line-height: 1.6; max-width: 240px; }
-.footer-links-group h4 { color: var(--gold); font-size: 11px; letter-spacing: 0.1em; margin-bottom: 20px; text-transform: uppercase; }
-.footer-links { list-style: none; }
-.footer-links li { margin-bottom: 12px; }
-.footer-links a { color: rgba(255,255,255,0.6); text-decoration: none; font-size: 12px; transition: color 0.2s; }
-.footer-links a:hover { color: var(--gold); }
-.footer-bottom {
-  text-align: center;
-  padding-top: 48px;
-  margin-top: 48px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  font-size: 10px;
-  letter-spacing: 0.04em;
-}
-@media (max-width: 768px) {
-  .footer-top { grid-template-columns: 1fr; gap: 32px; padding: 0 24px; text-align: center; }
-  .footer-tagline { max-width: 100%; }
-  .intro-inner { grid-template-columns: 1fr; gap: 40px; padding: 48px 0; }
-  .intro-right { grid-template-columns: 1fr; }
-  .cards-grid { grid-template-columns: 1fr; }
-  .highlights-grid { grid-template-columns: repeat(2,1fr); }
-  .section-card { padding: 40px 26px; }
-  .highlight-num { font-size: 40px; }
-}
-.btn-primary, .btn-outline {
-  display: inline-block;
-  text-decoration: none;
-  font-weight: 700;
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  transition: all 0.3s;
-  cursor: pointer;
-  font-size: 10px;
-  padding: 10px 22px;
-}
-.btn-outline { border: 1px solid currentColor; background: transparent; }
 </style>
 </head>
 <body>
 
-<!-- NAV (COMPACT) -->
 <nav>
   <a href="index.html" class="nav-logo"><img src="assets/logo.png" alt="Estora Capital Investment"></a>
   <ul class="nav-links">
-    <li><a href="index.html" class="active">Home</a></li>
+    <li><a href="index.html">Home</a></li>
     <li><a href="about.html">About</a></li>
     <li><a href="services.html">Services</a></li>
-    <li><a href="investment.html">Investment</a></li>
-    <li><a href="portfolio.html">Portfolio</a></li>
-    <li><a href="strategy.html">Strategy</a></li>
-    <li><a href="contact.html" class="nav-cta">Contact Us</a></li>
+    <li><a href="contact.html" class="nav-cta">Contact</a></li>
   </ul>
-  <button class="nav-hamburger" aria-label="Open menu"><span></span><span></span><span></span></button>
 </nav>
-<div class="nav-drawer">
-  <a href="index.html" class="active">Home</a>
-  <a href="about.html">About Us</a>
-  <a href="services.html">Services</a>
-  <a href="investment.html">Investment</a>
-  <a href="portfolio.html">Portfolio</a>
-  <a href="strategy.html">Strategy</a>
-  <a href="sustainability.html">Sustainability</a>
-  <a href="contact.html" class="drawer-cta">Contact Us</a>
-</div>
 
-<!-- HERO (CROPPED & SHORTER) -->
 <section id="hero">
   <div class="hero-bg">
     <div class="hero-slide" style="background-image:url('assets/home-hero-1.jpeg');"></div>
@@ -385,147 +99,20 @@ footer {
     <div class="hero-slide" style="background-image:url('assets/home-hero-3.jpeg');"></div>
   </div>
   <div class="hero-gradient"></div>
-  <div class="hero-stats">
-    <div class="hero-stat"><div class="hero-stat-num">10+</div><div class="hero-stat-lbl">Years Exp</div></div>
-    <div class="hero-stat"><div class="hero-stat-num">4</div><div class="hero-stat-lbl">Services</div></div>
-    <div class="hero-stat"><div class="hero-stat-num">2017</div><div class="hero-stat-lbl">Founded</div></div>
-  </div>
   <div class="hero-content">
     <div class="hero-eyebrow">
       <div class="hero-eyebrow-line"></div>
-      <span class="label">Lusaka, Zambia · Est. 2017</span>
+      <span class="label">Lusaka, Zambia</span>
     </div>
     <h1>Building <em>long-term value</em> through strategic real estate investment</h1>
-    <p class="hero-sub">Estora Capital is a Lusaka-based real estate investment firm focused on acquiring, developing, and actively managing property assets that deliver stable income and long-term capital growth.</p>
+    <p class="hero-sub">Estora Capital is a Lusaka-based real estate investment firm delivering stable income and long-term capital growth.</p>
     <div class="hero-btns">
       <a href="investment.html" class="btn-primary">View Investments</a>
       <a href="contact.html" class="btn-outline">Partner With Us</a>
     </div>
   </div>
-  <div class="hero-dots" id="heroDots">
-    <div class="hero-dot active" onclick="goToSlide(0)"></div>
-    <div class="hero-dot" onclick="goToSlide(1)"></div>
-    <div class="hero-dot" onclick="goToSlide(2)"></div>
-  </div>
-  <div class="hero-scroll"><div class="hero-scroll-line"></div><span>Scroll</span></div>
 </section>
-
-<!-- INTRO BAND (unchanged) -->
-<section class="intro-band">
-  <div class="container">
-    <div class="intro-inner">
-      <div class="intro-left">
-        <p class="lead">"We don't just invest in real estate — we build, manage, and optimize assets to deliver lasting value."</p>
-        <p>Since 2017, Estora Capital has focused on identifying undervalued opportunities, enhancing asset performance, and delivering sustainable, risk-adjusted returns. Our integrated model ensures control across the full investment lifecycle.</p>
-        <div style="margin-top:32px"><a href="about.html" class="btn-primary" style="font-size:10px;padding:12px 28px;">Learn About Us</a></div>
-      </div>
-      <div class="intro-right">
-        <div class="intro-cap">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 17V9l7-6 7 6v8H3z"/><path d="M8 17v-5h4v5"/></svg>
-          <div><strong>Property Investment</strong><span>Portfolio growth & acquisitions</span></div>
-        </div>
-        <div class="intro-cap">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="3" y="9" width="14" height="8"/><path d="M6 9V6a4 4 0 0 1 8 0v3"/><path d="M3 13h14"/></svg>
-          <div><strong>Property Development</strong><span>Value creation & construction</span></div>
-        </div>
-        <div class="intro-cap">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M3 14l4-5 4 3 4-7 4 4"/><path d="M2 17h16"/></svg>
-          <div><strong>Asset Management</strong><span>Performance optimization</span></div>
-        </div>
-        <div class="intro-cap">
-          <svg width="20" height="20" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="4" y="3" width="12" height="14" rx="1"/><path d="M7 3v14M4 9h7M4 13h5"/><circle cx="14" cy="14" r="3"/><path d="M14 12.5v1.5l1 1"/></svg>
-          <div><strong>Property Management</strong><span>Efficient operations</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- HIGHLIGHTS -->
-<section class="highlights">
-  <div class="container">
-    <div class="highlights-grid">
-      <div class="highlight-cell"><div class="highlight-num">10+</div><div class="highlight-desc">Years Combined Experience</div></div>
-      <div class="highlight-cell"><div class="highlight-num">4</div><div class="highlight-desc">Integrated Service Lines</div></div>
-      <div class="highlight-cell"><div class="highlight-num">2017</div><div class="highlight-desc">Established in Lusaka</div></div>
-      <div class="highlight-cell"><div class="highlight-num">100%</div><div class="highlight-desc">Fully Integrated Model</div></div>
-    </div>
-  </div>
-</section>
-
-<!-- CLOSING CTA -->
-<section class="closing-cta">
-  <div class="container">
-    <div>
-      <span class="label">Get Started</span>
-      <h2>Ready to invest<br>with <em>confidence</em>?</h2>
-      <p>Speak with our team about investment opportunities, strategic partnerships, or property management mandates.</p>
-      <div class="closing-btns">
-        <a href="contact.html" class="btn-primary">Get In Touch</a>
-        <a href="investment.html" class="btn-outline">Learn More</a>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- FOOTER -->
-<footer>
-  <div class="footer-top">
-    <div>
-      <a href="index.html"><img src="assets/logo.png" alt="Estora Capital Investment" class="footer-logo"></a>
-      <p class="footer-tagline">A Lusaka-based real estate investment and asset management firm committed to long-term value creation.</p>
-    </div>
-    <div class="footer-links-group">
-      <h4>Company</h4>
-      <ul class="footer-links">
-        <li><a href="about.html">About Us</a></li>
-        <li><a href="services.html">Services</a></li>
-        <li><a href="investment.html">Investment</a></li>
-        <li><a href="portfolio.html">Portfolio</a></li>
-      </ul>
-    </div>
-    <div class="footer-links-group">
-      <h4>More</h4>
-      <ul class="footer-links">
-        <li><a href="strategy.html">Strategy</a></li>
-        <li><a href="sustainability.html">Sustainability</a></li>
-        <li><a href="contact.html">Contact Us</a></li>
-      </ul>
-    </div>
-    <div class="footer-links-group">
-      <h4>Contact</h4>
-      <ul class="footer-links">
-        <li><a href="#">Lusaka, Zambia</a></li>
-        <li><a href="mailto:info@estoracapital.com">info@estoracapital.com</a></li>
-      </ul>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <p class="footer-copy">&copy; 2026 Estora Capital Investment. Lusaka, Zambia. All rights reserved.</p>
-    <p class="footer-copy">Real Estate · Asset Management · Property Development</p>
-  </div>
-</footer>
 
 <script src="shared.js"></script>
-<script>
-(function() {
-  const dots = document.querySelectorAll('.hero-dot');
-  let current = 0;
-  const total = dots.length;
-  const interval = 6000;
-
-  function setDot(idx) {
-    dots.forEach(d => d.classList.remove('active'));
-    dots[idx].classList.add('active');
-    current = idx;
-  }
-  setInterval(() => { setDot((current + 1) % total); }, interval);
-  window.goToSlide = function(idx) { setDot(idx); };
-})();
-// Mobile drawer toggle (if shared.js doesn't handle it)
-document.querySelector('.nav-hamburger')?.addEventListener('click', () => {
-  document.querySelector('.nav-drawer')?.classList.toggle('open');
-});
-</script>
 </body>
 </html>
